@@ -7,11 +7,20 @@ This course is still in development.
 ## Introduction
 
 This course is developed for PBA Electronics-ICT at [University College VIVES](https://www.vives.be/nl/technology/elektronica-ict).
-During this course you will learn ...
+During this course you will learn the basics of designing a pcb, ordering it and assembly & testing. We will be using Fusion 360 as a design tool.
 
 ## Content
 
-1. a
+1. Introduction
+2. Electrical diagram
+3. Printed Circuit Board
+4. Components
+5. Electrical diagram design
+6. Custom component library
+7. PCB trace
+8. PCB design & 3D model
+9. Ordering
+10. Assembly
 
 ## Sources
 
@@ -19,6 +28,7 @@ This work is the result of the knowledge of the writer & colleagues at VIVES Uni
 
 * Ronny Mees
 * Didier Vereecke
+* Sven Weyns
 
 And professionally relevant sources such as:
 

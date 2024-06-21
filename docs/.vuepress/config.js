@@ -17,10 +17,32 @@ module.exports = {
     ],
     sidebar: [
       {
-        text: '???',
+        text: 'Information',
         collapsible: true,
         children: [
-          '/11_introduction/README.md',          
+          '/11_introduction/README.md',
+          '/12_electrical_diagram/README.md',
+          '/13_pcb/README.md',
+          '/14_components/README.md',
+          '/15_pcb_trace/README.md'          
+        ]
+      },
+      {
+        text: 'Design',
+        collapsible: true,
+        children: [
+          '/21_electrical_diagram_design/README.md',
+          '/22_custom_component_library/README.md',
+          '/23_pcb_design/README.md'          
+        ]
+      },
+      {
+        text: 'Production',
+        collapsible: true,
+        children: [
+          '/31_ordering/README.md',
+          '/32_assembly/README.md',
+          '/33_testing/README.md'          
         ]
       }
     ],
