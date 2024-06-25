@@ -84,3 +84,63 @@ It's important to note that not all sub-functions have a Control Interface, thou
 
 ## Documentation
 
+Creating a solid architecture for a product or function requires thorough documentation of that architecture. These documents serve as references for all decisions made in the past. While it is ideal to have a single comprehensive document, it is often more practical to use several documents in different formats for various purposes. 
+
+It is important to note that these documents should not be restricted to a select group of designers. Properly prepared documentation will be used by departments such as production, service, and especially software development, as a reference. Sometimes these departments may need to add or omit information, but often they can use the documents directly. Therefore, it is crucial to coordinate with these teams to understand their requirements and preferences for the documentation.
+
+### Product Architecture Overview
+
+This is the most important document. It provides an overview of all functions, preferably in a graphic format. This can also be done for each sub-function within an overarching Architecture Document.
+
+![AUDIO-VIDEO-ARCHITECTURE-DOCUMENT](./images/afbeelding3.png)
+
+### PCB Overview
+
+This document offers a graphical overview of various PCBs, highlighting their physical properties, positions, and diversity. It may also include significant interfaces. The document is available here and can be combined with the "Product Architecture Overview" document.
+
+![PCB-OVERVIEW](./images/afbeelding4.png)
+
+### I/O Interface Overview
+
+This section is also a part of the "Product Architecture Overview" document, but it provides more detailed information on each function and interface. 
+
+A separate (Excel) document will be needed to cover the electrical and mechanical aspects. You will create an overview for each interface and connector, similar to a datasheet. This overview should define the connector type, electrical voltage levels, and possibly the maximum currents per pin. Note that special interfaces, such as I²C and USB, can have their own specific overviews.
+
+### Power Overview – Power Balance
+
+This overview provides a clear depiction of how power supplies are interconnected and the expected voltages and currents at various points. It helps identify if any additional protection is needed. Additionally, it shows the power consumption of each function across different modes (ON, Hibernate, Standby, etc.).
+
+![POWER-ARCHITECTURE](./images/afbeelding5.png)
+
+### Start-Up, Shut-Down, and Reset Behavior
+
+These behaviors are rarely given enough attention, yet they are often the cause of many designs that either fail to start properly or encounter issues during power interruptions. It involves documenting all possible power transitions for power supplies and interfaces in a timing diagram. By analyzing these diagrams, you can determine if additional RESET or ENABLE signals are necessary in your system.
+
+![POWER-UP-TIMINGS](./images/afbeelding6.png)
+
+### Summary
+
+Maintaining these documents throughout the entire development phase is crucial. When possible, try to combine overviews to reduce the workload, but be selective and make smart decisions about what to combine. Remember, these documents are not just for you, but for everyone involved in the development and production process. Regularly consult with relevant parties to understand what information they need and discuss the exact implementation details.
+
+Ensure that the different overviews are consistent. Minimize placing the same information in multiple documents, though sometimes it may be unavoidable. Changes in one document can impact others, so discuss every change with the entire team. Use *Change Control* systems to ensure everyone is aware of changes and can implement them accordingly. Always practice good version management and proper naming of your documents.
+
+:::tip 📑Note
+Architecture documents are essential for building a PCB, both electrically and mechanically. Without them, starting a schematic or inputting data into a CAD system is pointless. 
+:::
+
+## Electrical Diagram
+
+Once you have documented the basic architecture, you can start drawing the electrical diagram on paper. First, you will need to make decisions about which components or ready-to-buy systems you will use. For each component or system, you will need to consult the datasheet.
+
+### Components & Datasheets
+
+Datasheets contain all sorts of valuable information for your design:
+- Electrical characteristics (voltage, current, resistance, etc.)
+- Mechanical characteristics (footprint, measurements, thermal information, etc.)
+- Basic circuits for specific usages
+
+For instance, take the datasheet of the **LM386 from Texas Instruments**. It contains a lot of useful information for designing a product with that component. 
+
+
+
+
