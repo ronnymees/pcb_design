@@ -2,6 +2,8 @@
 
 Before diving into PCB design, it's essential to discuss the broader context, particularly **Product Design**. We need to understand whether a PCB is necessary and, if so, what functions and components it will require. A PCB is essentially a carrier for components, albeit a crucial one, and is only a part of the entire design process.
 
+## Product design
+
 When developing a product, it’s important to identify the **functions** the product must fulfill. These functions can range from something as simple as analog-to-digital conversion to something as complex as an automobile. For complex functions, we break them down into smaller sub-functions, and if necessary, further divide these into more manageable sub-sub-functions, and so on.
 
 To maintain clarity and avoid excessive subdivisions, we use a hierarchical terminology: **system** at the highest level, **product** at the next level, followed by **module**, and finally **function** at the lowest level. A function consists of **components**.
@@ -12,7 +14,7 @@ It's important to note that these terms are flexible depending on your perspecti
 
 Therefore, we will use the terms function, product, module, and system somewhat interchangeably. Always pay close attention to the context. The good news is that each level is structurally similar, making it easy to combine functions and upgrade them to modules or products.
 
-## Functions
+### Functions
 
 ![Function](./images/afbeelding1.png)
 
@@ -26,7 +28,7 @@ These types of small changes can have a significant impact on product realizatio
 
 Therefore, it is extremely important to clearly define the inputs and outputs, as well as the functions themselves, to avoid misunderstandings later on. A game controller is not the same as a console, even though it performs a crucial role in the overall gaming experience.
 
-## Requirements 
+### Requirements 
 
 Good and accurate detailing of input and output is crucial for finding the right solution. The more details you have, the more accurate and precise the solution will be. It is important to regularly test and validate this list with stakeholders.
 
@@ -46,13 +48,13 @@ Indirect functions support and enhance direct functions. Examples include a powe
 
 Non-functional requirements, which are generally valid for various purposes, are often separated and listed independently. This is because specific teams, usually part of a **Quality** and/or **Reliability** Team, have the knowledge and skills to monitor and follow up on these requirements, especially legal ones.
 
-## Architecture
+### Architecture
 
 If we examine a product or function closely, we notice a consistent design pattern in modern electronics. Thanks to the digital revolution and the advanced integration and capabilities of microcontrollers and software, circuits are now built from standardized components. This evolution has led to a clear classification into various groups, including two special categories: Power and Control. These two functions represent an integration of the power and control aspects of each individual function, a step that was taken years ago.
 
 ![GENERALPRODUCTARCHITECTURE](./images/afbeelding2.png)
 
-### Power
+#### Power
 
 Every electronic product, and therefore every electronic function, requires a power supply. This can come from the mains voltage (230V AC in Europe) without backup if the power fails, or from battery power. Although AC-derived DC voltage shares many similarities with battery supply, there are several crucial differences during normal operation:
 
@@ -60,7 +62,7 @@ Every electronic product, and therefore every electronic function, requires a po
 * **Power interruptions**: Battery-powered devices are rarely affected by power interruptions, although consideration must be given to the potential removal or intermittent contact of batteries (e.g., remote controls).
 * **Power consumption**: Battery-powered devices typically consume less power and operate at lower supply voltages (e.g., 5V max), while 230V AC-powered devices may encounter large inrush currents and associated electromagnetic interference.
 
-#### Hard vs. Soft Switch
+##### Hard vs. Soft Switch
 
 Many 230V AC-powered devices are continuously under voltage, either fully or partially. Completely removing the voltage can be done via a hard ON/OFF switch or by unplugging the power cord.
 
@@ -68,11 +70,11 @@ In addition to a hard ON/OFF switch, often required by law, there is a **soft sw
 
 However, this involves significant power losses (converting 230V AC to 3.3V DC at a current of a few mA is inefficient). Some devices use a rechargeable battery that charges during normal operation with high efficiency. Once charged, the device switches off and runs entirely on battery power. If the battery voltage drops too much, the sub-circuit recharges the battery by switching on the 230V network, then disconnects again. This is particularly useful for devices with long off-modes compared to on-modes. Certain lighting units are a good example of this.
 
-#### Interference
+##### Interference
 
 There is a good chance that the power supply is shared between different sub-functions. Drawing up a **power balance** is essential. Additionally, power supplies need to be sufficiently **decoupled** to prevent interference between modules and external functions.
 
-### Control
+#### Control
 
 Both the functions and the power supply need to be controlled and monitored. Previously, this was often done through direct interfaces, but now it is usually managed by a control architecture consisting of a microcontroller (µC) or microprocessor (µP) with associated memory and software.
 
@@ -82,43 +84,43 @@ This control architecture also provides the User Interface (UI), which often inc
 
 It's important to note that not all sub-functions have a Control Interface, though it is typically desirable, such as with a RESET function.
 
-## Documentation
+### Documentation
 
 Creating a solid architecture for a product or function requires thorough documentation of that architecture. These documents serve as references for all decisions made in the past. While it is ideal to have a single comprehensive document, it is often more practical to use several documents in different formats for various purposes. 
 
 It is important to note that these documents should not be restricted to a select group of designers. Properly prepared documentation will be used by departments such as production, service, and especially software development, as a reference. Sometimes these departments may need to add or omit information, but often they can use the documents directly. Therefore, it is crucial to coordinate with these teams to understand their requirements and preferences for the documentation.
 
-### Product Architecture Overview
+#### Product Architecture Overview
 
 This is the most important document. It provides an overview of all functions, preferably in a graphic format. This can also be done for each sub-function within an overarching Architecture Document.
 
 ![AUDIO-VIDEO-ARCHITECTURE-DOCUMENT](./images/afbeelding3.png)
 
-### PCB Overview
+#### PCB Overview
 
 This document offers a graphical overview of various PCBs, highlighting their physical properties, positions, and diversity. It may also include significant interfaces. The document is available here and can be combined with the "Product Architecture Overview" document.
 
 ![PCB-OVERVIEW](./images/afbeelding4.png)
 
-### I/O Interface Overview
+#### I/O Interface Overview
 
 This section is also a part of the "Product Architecture Overview" document, but it provides more detailed information on each function and interface. 
 
 A separate (Excel) document will be needed to cover the electrical and mechanical aspects. You will create an overview for each interface and connector, similar to a datasheet. This overview should define the connector type, electrical voltage levels, and possibly the maximum currents per pin. Note that special interfaces, such as I²C and USB, can have their own specific overviews.
 
-### Power Overview – Power Balance
+#### Power Overview – Power Balance
 
 This overview provides a clear depiction of how power supplies are interconnected and the expected voltages and currents at various points. It helps identify if any additional protection is needed. Additionally, it shows the power consumption of each function across different modes (ON, Hibernate, Standby, etc.).
 
 ![POWER-ARCHITECTURE](./images/afbeelding5.png)
 
-### Start-Up, Shut-Down, and Reset Behavior
+#### Start-Up, Shut-Down, and Reset Behavior
 
 These behaviors are rarely given enough attention, yet they are often the cause of many designs that either fail to start properly or encounter issues during power interruptions. It involves documenting all possible power transitions for power supplies and interfaces in a timing diagram. By analyzing these diagrams, you can determine if additional RESET or ENABLE signals are necessary in your system.
 
 ![POWER-UP-TIMINGS](./images/afbeelding6.png)
 
-### Summary
+#### Summary
 
 Maintaining these documents throughout the entire development phase is crucial. When possible, try to combine overviews to reduce the workload, but be selective and make smart decisions about what to combine. Remember, these documents are not just for you, but for everyone involved in the development and production process. Regularly consult with relevant parties to understand what information they need and discuss the exact implementation details.
 
@@ -126,6 +128,10 @@ Ensure that the different overviews are consistent. Minimize placing the same in
 
 :::tip 📑Note
 Architecture documents are essential for building a PCB, both electrically and mechanically. Without them, starting a schematic or inputting data into a CAD system is pointless. 
+:::
+
+:::danger 💬Attention
+**In the OPO Project Experience, the Architecture documents will be the most important communication tool between team members and your clients (the teachers).**
 :::
 
 ## Electrical Diagram
@@ -141,6 +147,38 @@ Datasheets contain all sorts of valuable information for your design:
 
 For instance, take the datasheet of the **LM386 from Texas Instruments**. It contains a lot of useful information for designing a product with that component. 
 
+:::tip 🌐Note
+For components, choose only those available on [Farnell](https://be.farnell.com/) or [Mouser](https://www.mouser.be/). For systems, you may use Chinese products as long as they are widely available and commonly used.
+:::
 
+### Designing the Electrical Diagram
 
+Based on the information from the datasheet(s) and your knowledge of electronics, begin drawing an electrical diagram. 
 
+Things to consider:
+* What voltage(s) do you need?
+* Do you need resistors (for current limitation, voltage divider, etc.)?
+* Do you need decoupling capacitors?
+* What is the power consumption?
+
+Once you have a basic diagram (this can also be for a sub-function), you should build a prototype.
+
+## Prototyping
+
+All electrical circuits must be checked for:
+
+* **Functions & Requirements**
+  * Does the intended functionality exist, work properly, and prove reliable?
+  * Are there any unintended side effects that negatively impact functionality, reliability, or life expectancy?
+
+* **Power & Signal**
+  * Are all currents and voltages as expected according to the architecture documentation?
+  * Are all signals as expected, with minimal interference?
+  * Is the start-up, shut-down, and reset behavior as expected according to the architecture documentation?
+
+* **Thermals**
+  * If there are components that dissipate heat, is the heat within the expected range?
+
+Based on your findings, you will need to make adjustments to your product design, primarily in your architecture documents. Then, revise your component choices if necessary and make the required changes to your electrical diagram.
+
+At that point, you need to create new prototypes and repeat this process until everything is ready for approval.
